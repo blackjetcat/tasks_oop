@@ -54,3 +54,10 @@ lab2plus3/cmake-build-debug/Makefile
 labDone/cmake-build-debug/CMakeFiles/3.12.3/CompilerIdC/CMakeCCompilerId.c
 labDone/cmake-build-debug/CMakeFiles/3.12.3/CompilerIdCXX/CMakeCXXCompilerId.cpp
 labDone/cmake-build-debug/CMakeFiles/feature_tests.c
+oop_lab1/.vs/oop_lab1ff/v15/.suo
+*.db
+*.ipch
+*.ilk
+*.pdb
+*.tlog
+*.idb
