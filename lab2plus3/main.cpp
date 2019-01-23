@@ -9,30 +9,30 @@
 using namespace std;
 
 //перегрузки = (можно перегружать только в кач-ве методов)
-catalogue& catalogue::operator= (const catalogue &tmp)
+companies& companies::operator= (const companies &tmp)
 {
-    agent_name = new char[strlen(tmp.get_agent()) + 1];
-    strcpy(agent_name, tmp.get_agent());
-    catalogue_name = new char[strlen(tmp.get_catalogue()) + 1];
-    strcpy(catalogue_name, tmp.get_catalogue());
+    ceo_name = new char[strlen(tmp.get_ceo()) + 1];
+    strcpy(ceo_name, tmp.get_ceo());
+    companies_name = new char[strlen(tmp.get_companies()) + 1];
+    strcpy(companies_name, tmp.get_companies());
     day = tmp.get_day();
-    price = tmp.get_price();
+    income = tmp.get_income();
     return *this;
 }
 
-char* catalogue::operator=(char* tmp)
+char* companies::operator=(char* tmp)
 {
-    char* newcatalogue;
-    newcatalogue = new char[strlen(tmp) + strlen(catalogue_name) + 1];
-    strcpy(newcatalogue, catalogue_name);
-    strcpy(newcatalogue, tmp);
-    return newcatalogue;
+    char* newcompanies;
+    newcompanies = new char[strlen(tmp) + strlen(companies_name) + 1];
+    strcpy(newcompanies, companies_name);
+    strcpy(newcompanies, tmp);
+    return newcompanies;
 }
 
 //перегрузки унарных операторов
-bool operator!(catalogue tmp) //friend функция
+bool operator!(companies tmp) //friend функция
 {
-    if ((!tmp.price) && (!tmp.day) && (!tmp.catalogue_name) && (!tmp.agent_name))
+    if ((!tmp.income) && (!tmp.day) && (!tmp.companies_name) && (!tmp.ceo_name))
     {
         return false;
     }
@@ -42,96 +42,96 @@ bool operator!(catalogue tmp) //friend функция
     }
 }
 
-void catalogue::operator++()
+void companies::operator++()
 {
     int n = 10;
     day++;
     while (n != 0)
     {
-        price++;
+        income++;
         n--;
     }
 }
 
-void catalogue::operator-()
+void companies::operator-()
 {
-    char* mid_char_catalogue;
-    char* mid_char_agent;
+    char* mid_char_companies;
+    char* mid_char_ceo;
     int mid_int;
 
-    mid_char_catalogue = new char[strlen(catalogue_name) + 1];
-    strcpy(mid_char_catalogue, catalogue_name);
-    mid_char_agent = new char[strlen(agent_name) + 1];
-    strcpy(mid_char_agent, agent_name);
-    delete[]catalogue_name;
-    delete[]agent_name;
-    catalogue_name = new char[strlen(mid_char_agent) + 1];
-    strcpy(catalogue_name, mid_char_agent);
-    agent_name = new char[strlen(mid_char_catalogue) + 1];
-    strcpy(agent_name, mid_char_catalogue);
+    mid_char_companies = new char[strlen(companies_name) + 1];
+    strcpy(mid_char_companies, companies_name);
+    mid_char_ceo = new char[strlen(ceo_name) + 1];
+    strcpy(mid_char_ceo, ceo_name);
+    delete[]companies_name;
+    delete[]ceo_name;
+    companies_name = new char[strlen(mid_char_ceo) + 1];
+    strcpy(companies_name, mid_char_ceo);
+    ceo_name = new char[strlen(mid_char_companies) + 1];
+    strcpy(ceo_name, mid_char_companies);
 
     mid_int = day;
-    day = price;
-    price = mid_int;
+    day = income;
+    income = mid_int;
 
 }
 
-void catalogue::zadanie(catalogue & tmp)
+void companies::zadanie(companies & tmp)
 {
-    tmp.day = 10 + tmp.price;
+    tmp.day = 1965 + tmp.income;
 }
 
-catalogue operator+(catalogue obj, int i) // обработка class+int
+companies operator+(companies obj, int i) // обработка class+int
 {
-    catalogue tmp;
-    tmp.day = obj.price + i;
+    companies tmp;
+    tmp.day = obj.income + i;
     return tmp;
 }
-catalogue operator+(int i, catalogue obj) // обработка int+class
+companies operator+(int i, companies obj) // обработка int+class
 {
-    catalogue tmp;
-    tmp.day = i + obj.price;
+    companies tmp;
+    tmp.day = i + obj.income;
     return tmp;
 }
 
-void catalogue::show_catalogue()
+void companies::show_companies()
 {
-    cout << "catalogue name: " << catalogue_name << setw(5) << " . Agent: " << agent_name << setw(5) << ". Enlisted, days ago: " << day << setw(5) << ". Price: " << price << endl;
+    cout << "companies name: " << companies_name << setw(5) << " . ceo: " << ceo_name << setw(5) << ". Year of creation: " << day << setw(5) << ". income, mil$: " << income << endl;
 }
 
-void catalogue::show_catalogue(int key)
+void companies::show_companies(int key)
 {
-    cout << "That's emergency catalogue show" << endl;
-    cout << "catalogue name: " << catalogue_name << setw(5) << ". Agent: " << agent_name << setw(5) << ". Enlisted, days ago: " << day << setw(5) << ". Price: " << price << endl;
+    cout << "That's emergency companies show" << endl;
+    cout << "company name: " << companies_name << setw(5) << ". ceo: " << ceo_name << setw(5) << ". Year of creation: " << day << setw(5) << ". income, mil$: " << income << endl;
 }
 
-void catalogue::change_catalogue(catalogue & tmp)
+void companies::change_companies(companies & tmp)
 {
     int ch;
-    cout << "What do you want to change? \n1 - catalogue name\n2 - Agent\n3 - Enlisted, days ago\n4 - Price";
+    cout << "What do you want to change? \n1 - company name\n2 - ceo\n3 - Year of creation\n4 - income";
     cin >> ch;
     switch (ch)
     {
         case 1:
         {
             char change[25];
-            cout << "Input new catalogue name: ";
+            cout << "Input new company name: ";
             cin >> change;
-            tmp.set_catalogue_name(change);
+            tmp.set_companies_name(change);
             break;
         }
         case 2:
         {
             char change[25];
-            cout << "Input new agent name: ";
+            cout << "Input new ceo name: ";
             cin >> change;
-            tmp.set_agent_name(change);
+            tmp.set_ceo_name(change);
             break;
         }
         case 3:
         {
             int change;
-            cout << "Input new day cout: ";
+            cout << "Input other year of creation: ";
             cin >> change;
             tmp.set_day(change);
             break;
@@ -139,9 +139,9 @@ void catalogue::change_catalogue(catalogue & tmp)
         case 4:
         {
             int change;
-            cout << "Input new price: ";
+            cout << "Input new income: ";
             cin >> change;
-            tmp.set_price(change);
+            tmp.set_income(change);
             break;
         }
         default:
@@ -150,6 +150,6 @@ void catalogue::change_catalogue(catalogue & tmp)
         }
 
             cout << "Result: " << endl;
-            tmp.show_catalogue(1);
+            tmp.show_companies(1);
     }
 }
